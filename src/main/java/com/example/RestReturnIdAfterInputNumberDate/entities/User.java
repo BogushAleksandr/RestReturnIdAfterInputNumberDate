@@ -1,23 +1,27 @@
 package com.example.RestReturnIdAfterInputNumberDate.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "format")
-public class Format implements Serializable {
+@Table(name = "tblUser")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "number")
-    private int number;
+    @NotBlank
+    @Column(name = "userNumber")
+    private int the_number;
 
-    @Column(name = "text")
+    @NotBlank
+    @Column(name = "userText")
     private String text;
 
-    @Column(name = "date")
+    @NotBlank
+    @Column(name = "userDate")
     private LocalDate date;
 
 }
