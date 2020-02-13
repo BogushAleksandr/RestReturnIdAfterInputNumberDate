@@ -1,16 +1,25 @@
 package com.example.RestReturnIdAfterInputNumberDate.controller;
 
-import com.example.RestReturnIdAfterInputNumberDate.repositories.UserRepository;
+import com.example.RestReturnIdAfterInputNumberDate.entities.User;
+import com.example.RestReturnIdAfterInputNumberDate.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
-
+    @PostMapping("/add")
+    private Long addUser(@Valid @RequestBody User user) {
+        return userService.addUser(user);
+    }
 }

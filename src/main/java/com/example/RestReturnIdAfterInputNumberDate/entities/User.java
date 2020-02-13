@@ -1,47 +1,43 @@
 package com.example.RestReturnIdAfterInputNumberDate.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.util.Calendar;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "tblUser")
-public class User{
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @NotBlank
     @Column(name = "userNumber")
-    private int userNumber;
+    private Double userNumber;
 
-    @NotBlank
     @Column(name = "userText")
     private String text;
 
-    @NotBlank
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     @Column(name = "userDate")
-    private LocalDate date;
+    private Calendar date;
 
-    /*@Override
-    public String toString() {
-        return "id = " + id + ", text = " + text + "date = " + date;
-    }*/
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getUserNumber() {
+    public Double getUserNumber() {
         return userNumber;
     }
 
-    public void setUserNumber(int the_number) {
-        this.userNumber = the_number;
+    public void setUserNumber(Double userNumber) {
+        this.userNumber = userNumber;
     }
 
     public String getText() {
@@ -52,11 +48,11 @@ public class User{
         this.text = text;
     }
 
-    public LocalDate getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 }
